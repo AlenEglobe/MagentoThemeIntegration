@@ -2,6 +2,7 @@
 	<body>
 		<!-- <referenceBlock name="header.container" remove="true" /> -->
 		<referenceBlock name="header.panel" remove="true" />
+		<referenceBlock name="copyright" template="Magento_Theme::Copyright.phtml" />
 		<!--
 		<referenceContainer name="page.wrapper">
 		<block class="Magento\Framework\View\Element\Template" name="top.header" template="NewTheme::customheader.phtml" before="header.container" />
