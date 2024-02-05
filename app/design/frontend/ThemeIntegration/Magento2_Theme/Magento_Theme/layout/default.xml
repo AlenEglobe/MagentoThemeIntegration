@@ -1,0 +1,12 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<body>
+		<!-- <referenceBlock name="header.container" remove="true" /> -->
+		<referenceBlock name="header.panel" remove="true" />
+		<!--
+		<referenceContainer name="page.wrapper">
+		<block class="Magento\Framework\View\Element\Template" name="top.header" template="NewTheme::customheader.phtml" before="header.container" />
+		</referenceContainer>
+		-->
+		<move element="minicart" destination="top.header" />
+	</body>
+</page>
