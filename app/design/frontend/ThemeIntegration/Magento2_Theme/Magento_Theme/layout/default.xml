@@ -3,6 +3,8 @@
 		<referenceBlock name="header.panel" remove="true" />
 		<referenceBlock name="copyright" template="Magento_Theme::Copyright.phtml" />
 		<referenceContainer name="footer">
+			<referenceBlock name="form.subscribe" remove="true" />
+			<block class="Magento\Framework\View\Element\Template" name="custom.block1" template="Magento_Theme::ContactUs.phtml" before="form.subscribe" />
 			<block class="Magento\Framework\View\Element\Template" name="custom.block" template="Magento_Theme::AboutUs.phtml" before="footer_links" />
 			<referenceBlock name="footer_links" template="Magento_Theme::FooterLinks.phtml" />
 		</referenceContainer>
