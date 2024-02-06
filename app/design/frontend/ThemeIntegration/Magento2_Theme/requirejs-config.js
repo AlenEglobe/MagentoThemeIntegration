@@ -1,7 +1,7 @@
 var config = {
     map: {
         "*": {
-            wktestrequire: "js/owl.carousel.min.js",
+            carousel: "js/owl.carousel.min",
         },
     },
 };

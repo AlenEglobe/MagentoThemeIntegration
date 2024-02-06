@@ -1,0 +1,51 @@
+<section class="slider-section">
+    <div class="page-main">
+        <div class="owl-carousel owl-theme home-slider owl-loaded owl-drag">
+
+
+
+            <div class="owl-stage-outer">
+                <div class="owl-stage" style="transform: translate3d(-3160px, 0px, 0px); transition: all 0s ease 0s; width: 11060px;">
+                    <div class="owl-item cloned" style="width: 1580px;">
+                        <div class="item"><img href="#" src="<?= $block->getViewFileUrl('images/slider1.jpg'); ?>"></div>
+                    </div>
+                    <div class="owl-item cloned" style="width: 1580px;">
+                        <div class="item"><img href="#" src="<?= $block->getViewFileUrl('images/slider1.jpg'); ?>"></div>
+                    </div>
+                    <div class="owl-item active" style="width: 1580px;">
+                        <div class="item"><img href="#" src="<?= $block->getViewFileUrl('images/slider1.jpg'); ?>"></div>
+                    </div>
+                    <div class="owl-item" style="width: 1580px;">
+                        <div class="item"><img href="#" src="<?= $block->getViewFileUrl('images/slider1.jpg'); ?>"></div>
+                    </div>
+                    <div class="owl-item" style="width: 1580px;">
+                        <div class="item"><img href="#" src="<?= $block->getViewFileUrl('images/slider1.jpg'); ?>"></div>
+                    </div>
+                    <div class="owl-item cloned" style="width: 1580px;">
+                        <div class="item"><img href="#" src="<?= $block->getViewFileUrl('images/slider1.jpg'); ?>"></div>
+                    </div>
+                    <div class="owl-item cloned" style="width: 1580px;">
+                        <div class="item"><img href="#" src="<?= $block->getViewFileUrl('images/slider1.jpg'); ?>"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="owl-nav"><button type="button" role="presentation" class="owl-prev"><span aria-label="Previous">‹</span></button><button type="button" role="presentation" class="owl-next"><span aria-label="Next">›</span></button></div>
+            <div class="owl-dots disabled"></div>
+        </div>
+    </div>
+</section>
+<script>
+    console.log('kerii')
+    require(['jquery', 'carousel'], function($) {
+        console.log('hellow')
+        $(document).ready(function() {
+            $('.home-slider').owlCarousel({
+                loop: true,
+                nav: true,
+                dots: false,
+                items: 1,
+                autoPlay: 2000,
+            })
+        });
+    });
+</script>
