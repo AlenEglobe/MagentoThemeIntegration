@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+	<table name="topbrands" resource="default" comment="">
+		<column xsi:type="int" name="Id" nullable="false" comment="EntityID" />
+		<column xsi:type="varchar" length="1024" name="Brands" nullable="false" comment="Error 404 Url" />
+		<column xsi:type="varchar" length="255" name="Image" nullable="true" comment="Image URL" />
+		<column xsi:type="varchar" length="255" name="Action" nullable="true" comment="Action" />
+		<constraint xsi:type="primary" referenceId="PRIMARY">
+			<column name="Id" />
+		</constraint>
+	</table>
+</schema>
