@@ -12,44 +12,44 @@ use Magento\Framework\App\ResponseInterface;
 class Index extends \Magento\Backend\App\Action
 {
     /**
-     * Holds and instance of the page factory
-     *
-     * @var bool|\Magento\Framework\View\Result\PageFactory
+     * @var \Magento\Framework\View\Result\PageFactory
      */
-    protected $resultPageFactory = false;
-    // protected $_postFactory;
+    protected $_resultPageFactory;
 
     /**
-     * Default index constructor
-     *
-     * @param \Magento\Backend\App\Action\Context $context
+     * @param \Magento\Backend\App\Action\Context        $context
      * @param \Magento\Framework\View\Result\PageFactory $resultPageFactory
      */
     public function __construct(
         \Magento\Backend\App\Action\Context $context,
         \Magento\Framework\View\Result\PageFactory $resultPageFactory
     ) {
-
-        $this->resultPageFactory = $resultPageFactory;
-        // $this->_postFactory = $postFactory;
         parent::__construct($context);
+        $this->_resultPageFactory = $resultPageFactory;
     }
 
     /**
-     * Default execute method which creates and returns the cms page
+     * Grid List page.
      *
-     * @return ResponseInterface|\Magento\Framework\Controller\ResultInterface|\Magento\Framework\View\Result\Page
+     * @return \Magento\Backend\Model\View\Result\Page
      */
     public function execute()
     {
-        // $collection =  $this->_postFactory->create();
-        // $data = $collection->getCollection();
-        // print_r($data->getData());
-        // die();
-        $testVariable = 1;
-        $resultPage = $this->resultPageFactory->create();
-        $resultPage->getConfig()->getTitle()->prepend((__('The Top Brands Page')));
+        /** @var \Magento\Backend\Model\View\Result\Page $resultPage */
+        $resultPage = $this->_resultPageFactory->create();
+        $resultPage->setActiveMenu('ThemeIntegration_TopBrands::brands_list');
+        $resultPage->getConfig()->getTitle()->prepend(__('The TopBrands Page'));
 
         return $resultPage;
+    }
+
+    /**
+     * Check Grid List Permission.
+     *
+     * @return bool
+     */
+    protected function _isAllowed()
+    {
+        return $this->_authorization->isAllowed('ThemeIntegration_TopBrands::brands_list');
     }
 }

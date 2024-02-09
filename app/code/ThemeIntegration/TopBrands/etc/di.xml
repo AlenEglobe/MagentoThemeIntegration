@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<preference for="ThemeIntegration\TopBrands\Api\Data\GridInterface" type="ThemeIntegration\TopBrands\Model\Post" />
+	<virtualType name="ThemeIntegration\TopBrands\Model\ResourceModel\Post\Post\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+		<arguments>
+			<argument name="mainTable" xsi:type="string">
+				top_brands
+			</argument>
+			<argument name="resourceModel" xsi:type="string">
+				ThemeIntegration\TopBrands\Model\ResourceModel\Post
+			</argument>
+		</arguments>
+	</virtualType>
+	<type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+		<arguments>
+			<argument name="collections" xsi:type="array">
+				<item name="ThemeIntegration_TopBrands_listing_data_source" xsi:type="string">
+					ThemeIntegration\TopBrands\Model\ResourceModel\Post\Post\Collection
+				</item>
+			</argument>
+		</arguments>
+	</type>
+</config>
