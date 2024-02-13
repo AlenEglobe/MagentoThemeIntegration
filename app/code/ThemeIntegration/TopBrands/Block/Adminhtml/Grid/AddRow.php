@@ -132,6 +132,6 @@ class AddRow extends \Magento\Backend\Block\Widget\Form\Container
     public function getImageUrlFromPath($imagePath)
     {
         return $this->storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA) . 'catalog/product' . $imagePath;
-        // var_dump($imagePath);
+        var_dump($imagePath);
     }
 }

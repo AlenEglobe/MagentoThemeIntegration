@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
 	<menu>
-		<add id="ThemeIntegration_TopBrands::top_brands" title="Top Brands" module="ThemeIntegration_TopBrands" action="topbrands/index/index" sortOrder="10" resource="ThemeIntegration_TopBrands::topbrands" parent="Magento_Catalog::inventory" />
+		<add id="ThemeIntegration_TopBrands::top_brands" title="Top Brands" module="ThemeIntegration_TopBrands" action="topbrands/grid/index" sortOrder="10" resource="ThemeIntegration_TopBrands::topbrands" parent="Magento_Catalog::inventory" />
 	</menu>
 </config>

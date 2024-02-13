@@ -45,7 +45,7 @@ class AddRow extends \Magento\Backend\App\Action
             $rowTitle = $rowData->getTitle();
             if (!$rowData->getArticleId()) {
                 $this->messageManager->addError(__('row data no longer exist.'));
-                $this->_redirect('thecoachsmb/grid/rowdata');
+                $this->_redirect('topbrands/grid/rowdata');
                 return;
             }
         }

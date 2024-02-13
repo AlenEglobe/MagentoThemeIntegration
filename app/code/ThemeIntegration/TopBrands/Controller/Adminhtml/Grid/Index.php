@@ -48,7 +48,8 @@ class Index extends \Magento\Backend\App\Action
      *
      * @return bool
      */
-    // protected function _isAllowed()
-    // {
-    // }
+    protected function _isAllowed()
+    {
+        return $this->_authorization->isAllowed('ThemeIntegration_TopBrands::brands_list');
+    }
 }

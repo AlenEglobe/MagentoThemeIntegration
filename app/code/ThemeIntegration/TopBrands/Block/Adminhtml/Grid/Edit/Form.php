@@ -62,7 +62,7 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
             [
                 'name' => 'Image',
                 'label' => __('Image'),
-                'id' => 'image',
+                'id' => 'Image',
                 'title' => __('Image'),
                 'class' => 'required-file',
                 'required' => true,
