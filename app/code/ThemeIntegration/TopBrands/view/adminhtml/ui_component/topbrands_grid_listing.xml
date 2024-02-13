@@ -38,7 +38,7 @@
 				topbrands_grid_listing_data_source
 			</argument>
 			<argument name="primaryFieldName" xsi:type="string">
-				article_id
+				id
 			</argument>
 			<argument name="requestFieldName" xsi:type="string">
 				id
@@ -81,9 +81,11 @@
 				<label translate="true">
 					ID
 				</label>
+				<!--
 				<sorting>
-					asc
+				asc
 				</sorting>
+				-->
 			</settings>
 		</column>
 		<column name="Brands">
@@ -94,6 +96,18 @@
 					</item>
 					<item name="label" xsi:type="string" translate="true">
 						Brands
+					</item>
+				</item>
+			</argument>
+		</column>
+		<column name="Image">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="filter" xsi:type="string">
+						textRange
+					</item>
+					<item name="label" xsi:type="string" translate="true">
+						Image
 					</item>
 				</item>
 			</argument>
