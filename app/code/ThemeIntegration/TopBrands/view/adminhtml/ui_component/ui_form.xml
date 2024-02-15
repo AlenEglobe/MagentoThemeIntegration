@@ -53,7 +53,7 @@
 			</argument>
 			<argument name="data" xsi:type="array">
 				<item name="config" xsi:type="array">
-					<item name="submit_url" xsi:type="url" path="topbrands/grid/save" />
+					<item name="submit_url" xsi:type="url" path="topbrands/grid/save" />  //here is where the controller connection is established.
 				</item>
 			</argument>
 		</argument>

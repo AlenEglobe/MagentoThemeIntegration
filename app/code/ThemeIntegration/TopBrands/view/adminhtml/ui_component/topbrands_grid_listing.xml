@@ -136,7 +136,7 @@
 				</item>
 			</argument>
 		</column>
-		<!-- <actionsColumn name="actions" class="ThemeIntegration\TopBrands\Ui\Component\Listing\Grid\Column\Action">
+		<actionsColumn name="actions" class="ThemeIntegration\TopBrands\Ui\Component\Listing\Grid\Column\Action">
 			<argument name="data" xsi:type="array">
 				<item name="config" xsi:type="array">
 					<item name="resizeEnabled" xsi:type="boolean">
@@ -150,6 +150,6 @@
 					</item>
 				</item>
 			</argument>
-		</actionsColumn> -->
+		</actionsColumn>
 	</columns>
 </listing>
