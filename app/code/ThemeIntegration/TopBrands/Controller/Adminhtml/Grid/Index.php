@@ -37,7 +37,7 @@ class Index extends \Magento\Backend\App\Action
     {
         /** @var \Magento\Backend\Model\View\Result\Page $resultPage */
         $resultPage = $this->_resultPageFactory->create();
-        $resultPage->setActiveMenu('ThemeIntegration_TopBrands::brands_list');
+
         $resultPage->getConfig()->getTitle()->prepend(__('The TopBrands Page'));
 
         return $resultPage;
@@ -48,8 +48,4 @@ class Index extends \Magento\Backend\App\Action
      *
      * @return bool
      */
-    protected function _isAllowed()
-    {
-        return $this->_authorization->isAllowed('ThemeIntegration_TopBrands::brands_list');
-    }
 }

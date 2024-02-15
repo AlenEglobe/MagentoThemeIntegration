@@ -5,6 +5,8 @@ namespace ThemeIntegration\TopBrands\Model;
 
 use ThemeIntegration\TopBrands\Api\Data\GridInterface;
 
+use ThemeIntegration\TopBrands\Model\ResourceModel\Grid\CollectionFactory;
+
 class Grid extends \Magento\Framework\Model\AbstractModel implements GridInterface
 {
     /**
@@ -27,6 +29,19 @@ class Grid extends \Magento\Framework\Model\AbstractModel implements GridInterfa
     /**
      * Initialize resource model.
      */
+
+    public function __construct(
+        \Magento\Framework\Model\Context $context,
+        \Magento\Framework\Registry $registry,
+        CollectionFactory $collectionFactory,
+        \Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
+        \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
+        array $data = []
+    ) {
+        $this->collectionFactory = $collectionFactory;
+        parent::__construct($context, $registry, $resource, $resourceCollection, $data);
+    }
+
     protected function _construct()
     {
         $this->_init('ThemeIntegration\TopBrands\Model\ResourceModel\Grid');
@@ -36,6 +51,13 @@ class Grid extends \Magento\Framework\Model\AbstractModel implements GridInterfa
      *
      * @return int
      */
+    public function getSortedCollection()
+    {
+        $collection = $this->collectionFactory->create();
+        $collection->setOrder('id', 'DESC');
+        return $collection;
+    }
+
     public function getArticleId()
     {
         return $this->getData(self::ARTICLE_ID);

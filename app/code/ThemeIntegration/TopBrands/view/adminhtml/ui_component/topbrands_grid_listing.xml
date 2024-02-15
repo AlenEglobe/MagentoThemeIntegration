@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Ui/etc/ui_configuration.xsd">
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
 	<argument name="data" xsi:type="array">
 		<item name="js_config" xsi:type="array">
 			<item name="provider" xsi:type="string">
@@ -24,7 +23,7 @@
 					primary
 				</item>
 				<item name="url" xsi:type="string">
-					*/*/addrow
+					topbrands/grid/form
 				</item>
 			</item>
 		</item>
@@ -119,38 +118,42 @@
 				</item>
 			</argument>
 		</column>
+		<!--
 		<column name="Image" class="ThemeIntegration\TopBrands\Ui\Component\Listing\Grid\Column\ShowImage">
-			<argument name="data" xsi:type="array">
-				<item name="config" xsi:type="array">
-					<item name="filter" xsi:type="string">
-						false
-					</item>
-					<item name="label" xsi:type="string" translate="true">
-						Template Preview
-					</item>
-					<item name="sortOrder" xsi:type="number">
-						40
-					</item>
-					<item name="bodyTmpl" xsi:type="string">
-						ui/grid/cells/html
-					</item>
-				</item>
-			</argument>
+		<argument name="data" xsi:type="array">
+		<item name="config" xsi:type="array">
+		<item name="filter" xsi:type="string">
+		false
+		</item>
+		<item name="label" xsi:type="string" translate="true">
+		Template Preview
+		</item>
+		<item name="sortOrder" xsi:type="number">
+		40
+		</item>
+		<item name="bodyTmpl" xsi:type="string">
+		ui/grid/cells/html
+		</item>
+		</item>
+		</argument>
 		</column>
+		-->
+		<!--
 		<actionsColumn name="actions" class="ThemeIntegration\TopBrands\Ui\Component\Listing\Grid\Column\Action">
-			<argument name="data" xsi:type="array">
-				<item name="config" xsi:type="array">
-					<item name="resizeEnabled" xsi:type="boolean">
-						false
-					</item>
-					<item name="resizeDefaultWidth" xsi:type="string">
-						107
-					</item>
-					<item name="indexField" xsi:type="string">
-						id
-					</item>
-				</item>
-			</argument>
+		<argument name="data" xsi:type="array">
+		<item name="config" xsi:type="array">
+		<item name="resizeEnabled" xsi:type="boolean">
+		false
+		</item>
+		<item name="resizeDefaultWidth" xsi:type="string">
+		107
+		</item>
+		<item name="indexField" xsi:type="string">
+		id
+		</item>
+		</item>
+		</argument>
 		</actionsColumn>
+		-->
 	</columns>
 </listing>
