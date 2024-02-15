@@ -27,7 +27,7 @@ class SaveButton extends Generic implements ButtonProviderInterface
                     ],
                 ],
             ],
-            'class_name' => Container::SPLIT_BUTTON
+
             // 'options' => $this->getOptions(),
         ];
     }
