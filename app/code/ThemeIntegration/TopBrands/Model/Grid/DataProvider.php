@@ -23,10 +23,31 @@ class DataProvider extends AbstractDataProvider
 
     public function getData()
     {
-        $items = $this->collection->getItems();
-        foreach ($items as $model) {
-            $this->loadedData[$model->getId()] = $model->getData();
+        if (isset($this->loadedData)) {
+            return $this->loadedData;
         }
+        $items = $this->collection->getItems();
+
+        foreach ($items as $brand) {
+            $brandData = $brand->getData();
+            $brand_img = $brandData['Image'];
+
+            // Assuming $brand_img_url is defined and contains the image URL or path
+            $brand_img_url = $brand_img; // Adjust this line according to your actual implementation
+
+            unset($brandData['Image']); // Remove the original image data
+
+            // Create a new array for the image data
+            $brandData['Image'] = [
+                [
+                    'Brands' => $brand_img,
+                    'Image' => $brand_img_url,
+                ]
+            ];
+
+            $this->loadedData[$brand->getEntityId()] = $brandData;
+        }
+
         return $this->loadedData;
     }
 }

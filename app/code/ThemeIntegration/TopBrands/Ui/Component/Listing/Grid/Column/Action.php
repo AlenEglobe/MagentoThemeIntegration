@@ -56,7 +56,8 @@ class Action extends Column
                     $item[$name]['edit'] = [
                         'href' => $this->_urlBuilder->getUrl(
                             'topbrands/grid/edit',
-                            ['id' => $item['id']]
+                            ['id' => $item['id']],
+                            // ['Image' => $item['Image']]
                         ),
                         'label' => __('Edit')
                     ];
