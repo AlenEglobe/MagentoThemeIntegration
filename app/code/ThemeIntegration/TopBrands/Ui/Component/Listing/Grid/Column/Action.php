@@ -55,10 +55,10 @@ class Action extends Column
                 if (isset($item['id'])) {
                     $item[$name]['edit'] = [
                         'href' => $this->_urlBuilder->getUrl(
-                            $this->_editUrl,
+                            'topbrands/grid/edit',
                             ['id' => $item['id']]
                         ),
-                        'label' => __('Edit'),
+                        'label' => __('Edit')
                     ];
                 }
             }

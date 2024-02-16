@@ -2,7 +2,6 @@
 
 namespace ThemeIntegration\TopBrands\Controller\Adminhtml\Grid;
 
-use Magento\Framework\App\ResponseInterface;
 
 /**
  * Class Index is used to create and return the top brands cms page
@@ -43,9 +42,5 @@ class Index extends \Magento\Backend\App\Action
         return $resultPage;
     }
 
-    /**
-     * Check Grid List Permission.
-     *
-     * @return bool
-     */
+    
 }

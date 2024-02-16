@@ -136,7 +136,7 @@
 				</item>
 			</argument>
 		</column>
-		<actionsColumn name="actions" class="ThemeIntegration\TopBrands\Ui\Component\Listing\Grid\Column\Action">
+		<!-- <actionsColumn name="actions" class="ThemeIntegration\TopBrands\Ui\Component\Listing\Grid\Column\Action">
 			<argument name="data" xsi:type="array">
 				<item name="config" xsi:type="array">
 					<item name="resizeEnabled" xsi:type="boolean">
@@ -148,8 +148,17 @@
 					<item name="indexField" xsi:type="string">
 						id
 					</item>
+					<item name="sortOrder" xsi:type="number">
+						100
+					</item>
+					Ensure it comes after other columns
 				</item>
 			</argument>
-		</actionsColumn>
+		</actionsColumn> -->
+		<actionsColumn name="actions" class="ThemeIntegration\TopBrands\Ui\Component\Listing\Grid\Column\Action" component="Magento_Customer/js/grid/columns/actions">
+            <settings>
+                <indexField>id</indexField>
+            </settings>
+        </actionsColumn>
 	</columns>
 </listing>
