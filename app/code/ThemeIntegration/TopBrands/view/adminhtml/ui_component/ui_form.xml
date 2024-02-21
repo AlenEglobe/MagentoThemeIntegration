@@ -92,10 +92,10 @@
 						input
 					</item>
 					<item name="source" xsi:type="string">
-						brand_name
+						Brands
 					</item>
 					<item name="dataScope" xsi:type="string">
-						brand_name
+						Brands
 					</item>
 					<item name="validation" xsi:type="array">
 						<item name="required-entry" xsi:type="boolean">

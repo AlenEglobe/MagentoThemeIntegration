@@ -10,7 +10,7 @@ use Magento\Framework\UrlInterface;
 class Action extends Column
 {
     /** Url path */
-    const ROW_EDIT_URL = 'topbrands/grid/addrow';
+    const ROW_EDIT_URL = 'topbrands/grid/edit';
     /** @var UrlInterface */
     protected $_urlBuilder;
 

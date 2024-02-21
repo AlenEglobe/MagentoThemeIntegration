@@ -25,7 +25,7 @@
 		</item>
 		<item name="buttons" xsi:type="array">
 			<!--
-			<item name="back" xsi:type="string">Devhooks\HelloWorld\Block\Adminhtml\Button\Back</item>
+			<item name="back" xsi:type="string">Devhooks\HelloWorld\Block\Adminhtml\Buton\Back</item>
 			<item name="reset" xsi:type="string">Devhooks\HelloWorld\Block\Adminhtml\Button\Reset</item>
 			<item name="delete" xsi:type="string">Devhooks\HelloWorld\Block\Adminhtml\Button\Delete</item>
 			-->
@@ -53,7 +53,7 @@
 			</argument>
 			<argument name="data" xsi:type="array">
 				<item name="config" xsi:type="array">
-					<item name="submit_url" xsi:type="url" path="topbrands/grid/save" />
+					<item name="submit_url" xsi:type="url" path="topbrands/grid/upload" />
 					//here is where the controller connection is established.
 				</item>
 			</argument>
@@ -139,45 +139,5 @@
 				</imageUploader>
 			</formElements>
 		</field>
-		<!--
-		<field name="Image" formElement="imageUploader">
-		<argument name="data" xsi:type="array">
-		<item name="config" xsi:type="array">
-		<item name="dataType" xsi:type="string">
-		string
-		</item>
-		<item name="label" xsi:type="string" translate="true">
-		Image
-		</item>
-		<item name="formElement" xsi:type="string">
-		fileUploader
-		</item>
-		<item name="previewTmpl" xsi:type="string">
-		ThemeIntegration_TopBrands/image-preview
-		</item>
-		<item name="elementTmpl" xsi:type="string">
-		ui/form/element/uploader/uploader
-		</item>
-		<item name="required" xsi:type="boolean">
-		false
-		</item>
-		<item name="uploaderConfig" xsi:type="array">
-		<item name="url" xsi:type="url" path="topbrands/grid/image" />
-		</item>
-		</item>
-		</argument>
-		<settings>
-		<notice translate="true">
-		Allowed file types: jpeg, gif, png.
-		</notice>
-		<label translate="true">
-		Image
-		</label>
-		<componentType>
-		imageUploader
-		</componentType>
-		</settings>
-		</field>
-		-->
 	</fieldset>
 </form>
