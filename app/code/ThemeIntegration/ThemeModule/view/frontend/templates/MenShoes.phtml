@@ -10,7 +10,7 @@ $shoesData = $blockobj->getShoesList();
 // $shoes = $shoesData->getData();
 
 // foreach ($shoesData as $shoe) {
-//     var_dump($shoe['image']);
+//     var_dump($shoe->getData());
 // }
 // dd();
 
@@ -59,7 +59,10 @@ $shoesData = $blockobj->getShoesList();
                             $productImage = $blockobj->getProductImageUrl($shoe);
                             // print_r($productImage);
                             // exit();
-
+                            $productId = $blockobj->getProductId($shoe);
+                            $simpleProducts = $blockobj->getSimpleProduct($productId);
+                            // var_dump($simpleProducts);
+                            // dd();
                         ?>
 
 
@@ -100,9 +103,17 @@ $shoesData = $blockobj->getShoesList();
                                             </div>
                                             <div class="swatch-attribute color" data-attribute-code="color" data-attribute-id="93">
                                                 <div aria-activedescendant="" tabindex="0" aria-invalid="false" aria-required="true" role="listbox" aria-label="Color" class="swatch-attribute-options clearfix">
-                                                    <div class="swatch-option color" id="option-label-color-93-item-50" index="0" aria-checked="false" aria-describedby="option-label-color-93" tabindex="0" data-option-type="1" data-option-id="50" data-option-label="Blue" aria-label="Blue" role="option" data-thumb-width="110" data-thumb-height="90" data-option-tooltip-value="#DD4A4A" style="background: #DD4A4A no-repeat center; background-size: initial;"></div>
-                                                    <div class="swatch-option color" id="option-label-color-93-item-56" index="1" aria-checked="false" aria-describedby="option-label-color-93" tabindex="0" data-option-type="1" data-option-id="56" data-option-label="Orange" aria-label="Orange" role="option" data-thumb-width="110" data-thumb-height="90" data-option-tooltip-value="#717171" style="background: #717171 no-repeat center; background-size: initial;"></div>
-                                                    <div class="swatch-option color" id="option-label-color-93-item-57" index="2" aria-checked="false" aria-describedby="option-label-color-93" tabindex="0" data-option-type="1" data-option-id="57" data-option-label="Purple" aria-label="Purple" role="option" data-thumb-width="110" data-thumb-height="90" data-option-tooltip-value="#4AA8DD" style="background: #4AA8DD no-repeat center; background-size: initial;"></div>
+                                                    <?php foreach ($simpleProducts as $simpleProduct) :
+                                                    ?>
+
+
+                                                        <button class="swatch-option color" id="option-label-color-93-item-50" index="0" aria-checked="false" aria-describedby="option-label-color-93" tabindex="0" data-option-type="1" data-option-id="<?= $simpleProduct['id']; ?>" data-option-label="Blue" aria-label="Blue" role="option" data-thumb-width="110" data-thumb-height="90" data-option-tooltip-value="#DD4A4A" style="background: <?= $simpleProduct['color']; ?> no-repeat center; background-size: initial;">
+                                                        </button>
+                                                        <!-- <button class="swatch-option color" id="option-label-color-93-item-56" index="1" aria-checked="false" aria-describedby="option-label-color-93" tabindex="0" data-option-type="1" data-option-id="56" data-option-label="Orange" aria-label="Orange" role="option" data-thumb-width="110" data-thumb-height="90" data-option-tooltip-value="#717171" style="background: #717171 no-repeat center; background-size: initial;">
+                                                        </button>
+                                                        <button class="swatch-option color" id="option-label-color-93-item-57" index="2" aria-checked="false" aria-describedby="option-label-color-93" tabindex="0" data-option-type="1" data-option-id="57" data-option-label="Purple" aria-label="Purple" role="option" data-thumb-width="110" data-thumb-height="90" data-option-tooltip-value="#4AA8DD" style="background: #4AA8DD no-repeat center; background-size: initial;">
+                                                        </button> -->
+                                                    <?php endforeach; ?>
                                                 </div>
                                             </div>
                                         </div>

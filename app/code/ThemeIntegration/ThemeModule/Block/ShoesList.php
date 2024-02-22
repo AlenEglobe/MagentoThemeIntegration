@@ -19,6 +19,7 @@ class ShoesList extends Template
      * @var CollectionFactory
      */
     protected $collectionFactory;
+    protected $productRepository;
 
     /**
      * ShoesList constructor.
@@ -32,11 +33,13 @@ class ShoesList extends Template
         Context $context,
         CategoryFactory $categoryFactory,
         CollectionFactory $collectionFactory,
+        \Magento\Catalog\Model\ProductRepository $productRepository,
         array $data = []
     ) {
         parent::__construct($context, $data);
         $this->categoryFactory = $categoryFactory;
         $this->collectionFactory = $collectionFactory;
+        $this->productRepository = $productRepository;
     }
 
     /**
@@ -68,5 +71,35 @@ class ShoesList extends Template
 
         $imageUrl = $mediaBaseUrl . 'catalog/product/' . $image;
         return $imageUrl;
+    }
+
+    public function getSimpleProduct($configProductId)
+    {
+
+        $configProduct = $this->productRepository->getById($configProductId); // get the configurable product using its id .
+
+        $simpleProductArray = $configProduct->getTypeInstance()->getUsedProducts($configProduct);
+
+        foreach ($simpleProductArray as $product) {
+
+            $simpleProduct[] = [
+                'id' => $product->getId(),
+                'title' => $product->getName(),
+
+                'sku' => $product->getSku(),
+                'color' => $product->getAttributeText('color'),
+            ];
+        }
+
+
+
+        return $simpleProduct;
+    }
+
+
+    public function getProductId($product)
+    {
+        $productId = $product->getId();
+        return $productId;
     }
 }
