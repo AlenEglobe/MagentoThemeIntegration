@@ -1,10 +1,12 @@
 <?php
+
 namespace ThemeIntegration\ThemeModule\Block;
 
 use Magento\Catalog\Model\CategoryFactory;
 use Magento\Catalog\Model\ResourceModel\Product\CollectionFactory;
 use Magento\Framework\View\Element\Template;
 use Magento\Framework\View\Element\Template\Context;
+use Magento\Catalog\Model\ResourceModel\Product\Collection as ProductCollection;
 
 class ShoesList extends Template
 {
@@ -40,18 +42,31 @@ class ShoesList extends Template
     /**
      * Get shoes list under the category ID 23
      *
-     * @return \Magento\Catalog\Model\ResourceModel\Product\Collection
+     * @return ProductCollection
      */
-    public function getShoesList()
+    public function getShoesList(): ProductCollection
     {
         $categoryId = 23; // Category ID for shoes
         $category = $this->categoryFactory->create()->load($categoryId);
 
-        $shoesCollection = $this->collectionFactory->create();
-        $shoesCollection->addAttributeToSelect('*')
-            ->addCategoryFilter($category)
-            ->addAttributeToFilter('status', \Magento\Catalog\Model\Product\Attribute\Source\Status::STATUS_ENABLED);
+        $products = $this->collectionFactory->create();
 
-        return $shoesCollection;
+        $products->addAttributeToSelect('*');
+        $products->addCategoryFilter($category);
+
+        // $shoesCollection = $category->getProductCollection()->addAttributeToSelect('*');
+        return $products;
+    }
+
+    public function getProductImageUrl($product)
+    {
+
+        $mediaBaseUrl = $this->_storeManager->getStore()
+            ->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+
+        $image = $product->getImage();
+
+        $imageUrl = $mediaBaseUrl . 'catalog/product/' . $image;
+        return $imageUrl;
     }
 }
