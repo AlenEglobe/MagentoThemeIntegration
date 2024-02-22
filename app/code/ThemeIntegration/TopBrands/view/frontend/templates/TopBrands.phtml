@@ -1,0 +1,63 @@
+<?php
+
+
+use ThemeIntegration\TopBrands\Block\TopBrandsList as BlockTopBrandsList;
+
+$blockobj = $block->getLayout()->createBlock(BlockTopBrandsList::class);
+
+$topbrands = $blockobj->getTopBrands();
+// print_r($topbrands);
+// exit();
+
+?>
+<script>
+   console.log('kerii')
+   require(['jquery', 'carousel'], function($) {
+      console.log('hellow')
+      $('.top-brands-slider').owlCarousel({
+         loop: true,
+         dots: false,
+         autoPlay: 2000,
+         responsive: {
+            0: {
+               autoWidth: true,
+               margin: 10
+            },
+            768: {
+               items: 4
+            },
+            860: {
+               items: 5
+            },
+            992: {
+               items: 4
+            },
+            1300: {
+               items: 5
+            },
+            1500: {
+               items: 6
+            }
+         }
+      })
+   })
+</script>
+<section class="top-brands-section">
+   <div class="page-main">
+      <div class="content-heading">
+         <h2 class="title">Top brands</h2>
+      </div>
+      <ul class="owl-carousel owl-theme  top-brands-slider">
+         <?php foreach ($topbrands as $topbrand) : ?>
+
+            <li class="top-brands-list">
+               <a href="#">
+                  <figure class="top-brands-image" style="background-image: url('<?php echo $topbrand['image']; ?>');"> </figure>
+                  <h4><?php echo $topbrand['title']; ?></h4>
+               </a>
+            </li>
+         <?php endforeach; ?>
+
+      </ul>
+   </div>
+</section>

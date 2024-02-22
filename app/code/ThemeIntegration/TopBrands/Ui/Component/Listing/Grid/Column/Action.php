@@ -60,6 +60,18 @@ class Action extends Column
                         ),
                         'label' => __('Edit'),
                     ];
+
+                    $item[$name]['delete'] = [
+                        'href' => $this->_urlBuilder->getUrl(
+                            'topbrands/grid/delete',
+                            ['id' => $item['id']]
+                        ),
+                        'label' => __('Delete'),
+                        'confirm' => [
+                            'title' => __('Delete Item'),
+                            'message' => __('Are you sure you want to delete this item?'),
+                        ],
+                    ];
                 }
             }
         }

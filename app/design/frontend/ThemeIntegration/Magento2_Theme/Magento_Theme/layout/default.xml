@@ -12,6 +12,8 @@
 			<referenceBlock name="content">
 				<block class="Magento\Framework\View\Element\Template" name="custom.slider" template="Magento_Theme::Slider.phtml" />
 				<block class="ThemeIntegration\ThemeModule\Block\CategoryList" name="custom.category" template="ThemeIntegration_ThemeModule::TopCategories.phtml" />
+				<block class="ThemeIntegration\TopBrands\Block\TopBrandsList" name="topbrands.block" template="ThemeIntegration_TopBrands::TopBrands.phtml" />
+				<block class="ThemeIntegration\ThemeModule\Block\ShoesList" name="shoes.block" template="ThemeIntegration_ThemeModule::MenShoes.phtml" />
 			</referenceBlock>
 		</referenceContainer>
 		<!--
