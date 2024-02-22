@@ -1,0 +1,18 @@
+<?php
+
+use ThemeIntegration\ThemeModule\Block\ShoesList;
+
+$blockobj = $block->getLayout()->createBlock(ShoesList::class);
+$shoes = $blockobj->getShoesList();
+
+var_dump($shoes);
+dd();
+
+?>
+<section class="products-section">
+    <div class="page-main">
+        <div class="content-heading">
+            <h2 class="title">Mens SHoes</h2>
+        </div>
+    </div>
+</section>
