@@ -73,6 +73,15 @@ class ShoesList extends Template
         return $imageUrl;
     }
 
+    public function getSimpleProductImageUrl($simpleProductId){
+        $mediaBaseUrl = $this->_storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+
+        $simpleProduct = $this->productRepository->getById($simpleProductId);
+        $image = $simpleProduct->getImage();
+        $imageUrl = $mediaBaseUrl. 'catalog/product/'. $image;
+        return $imageUrl;
+    }
+
     public function getSimpleProduct($configProductId)
     {
 
@@ -85,7 +94,7 @@ class ShoesList extends Template
             $simpleProduct[] = [
                 'id' => $product->getId(),
                 'title' => $product->getName(),
-
+                'image' => $product->getData('image'),
                 'sku' => $product->getSku(),
                 'color' => $product->getAttributeText('color'),
             ];

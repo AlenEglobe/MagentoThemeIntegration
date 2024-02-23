@@ -61,8 +61,8 @@ $shoesData = $blockobj->getShoesList();
                             // exit();
                             $productId = $blockobj->getProductId($shoe);
                             $simpleProducts = $blockobj->getSimpleProduct($productId);
-                            // var_dump($simpleProducts);
-                            // dd();
+                            //    var_dump($simpleProducts);    
+                            //     dd(); 
                         ?>
 
 
@@ -71,7 +71,7 @@ $shoesData = $blockobj->getShoesList();
                                     <a href="#" class="product-item-photo">
                                         <span class="product-image-container product-image-container-1562" style="width: 240px;">
                                             <span class="product-image-wrapper" style="padding-bottom: 125%;">
-                                                <img class="product-image-photo" src="<?= $productImage; ?>" loading="lazy" width="240" height="300" alt="Product image"></span>
+                                                <img class="product-image-photo config-product-image" src="<?= $productImage; ?>" data-product-id=<?= $productId; ?>loading="lazy" width="240" height="300" alt="Product image"></span>
                                         </span>
                                         <style>
                                             .product-image-container-1562 {
@@ -104,6 +104,9 @@ $shoesData = $blockobj->getShoesList();
                                             <div class="swatch-attribute color" data-attribute-code="color" data-attribute-id="93">
                                                 <div aria-activedescendant="" tabindex="0" aria-invalid="false" aria-required="true" role="listbox" aria-label="Color" class="swatch-attribute-options clearfix">
                                                     <?php foreach ($simpleProducts as $simpleProduct) :
+                                                        // $image = $blockobj->getSimpleProductImageUrl($simpleProduct['id']);
+                                                        // echo $image;
+                                                        // exit();
                                                     ?>
 
 
