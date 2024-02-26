@@ -61,6 +61,7 @@ $shoesData = $blockobj->getShoesList();
                             // exit();
                             $productId = $blockobj->getProductId($shoe);
                             $simpleProducts = $blockobj->getSimpleProduct($productId);
+                            $formkey = $blockobj->getFormKeyForWishlist();
                             //    var_dump($simpleProducts);    
                             //     dd(); 
                         ?>
@@ -132,8 +133,8 @@ $shoesData = $blockobj->getShoesList();
                                                         <input class="swatch-input super-attribute-select" name="super_attribute[144]" type="text" value="" data-selector="super_attribute[144]" data-validate="{required: true}" aria-required="true" aria-invalid="false"><input class="swatch-input super-attribute-select" name="super_attribute[93]" type="text" value="" data-selector="super_attribute[93]" data-validate="{required: true}" aria-required="true" aria-invalid="false">
                                                     </form>
                                                 </div>
-                                                <div class="actions-secondary" data-role="add-to-links">
-                                                    <a href="#" data-post="{&quot;action&quot;:&quot;https:\/\/magento.nublue.co.uk\/wishlist\/index\/add\/&quot;,&quot;data&quot;:{&quot;product&quot;:1562,&quot;uenc&quot;:&quot;aHR0cHM6Ly9tYWdlbnRvLm51Ymx1ZS5jby51ay8,&quot;}}" class="action towishlist" data-action="add-to-wishlist" title="Add to Wish List">
+                                                <div class="actions-secondary" data-role="add-to-links" data-product-id="<?= $productId; ?>" data-form-key="<?= $formkey; ?>">
+                                                    <a class="action towishlist" data-action="add-to-wishlist" title="Add to Wish List">
                                                         <span>Add to Wish List</span>
                                                     </a>
                                                 </div>

@@ -4,8 +4,10 @@
 		<script src="ThemeIntegration_ThemeModule::js/ShoesSwatches.js" />
 	</head>
 	<body>
+		<!--
 		<referenceContainer name="content">
-			<block class="ThemeIntegration\ThemeModule\Block\CategoryList" name="custom.slider" template="ThemeIntegration_ThemeModule::TopCategories.phtml" />
+		<block class="ThemeIntegration\ThemeModule\Block\CategoryList" name="custom.slider" template="ThemeIntegration_ThemeModule::TopCategories.phtml" />
 		</referenceContainer>
+		-->
 	</body>
 </page>

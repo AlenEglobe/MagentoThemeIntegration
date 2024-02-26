@@ -7,6 +7,7 @@ use Magento\Catalog\Model\ResourceModel\Product\CollectionFactory;
 use Magento\Framework\View\Element\Template;
 use Magento\Framework\View\Element\Template\Context;
 use Magento\Catalog\Model\ResourceModel\Product\Collection as ProductCollection;
+use Magento\Framework\Data\Form\FormKey;
 
 class ShoesList extends Template
 {
@@ -15,6 +16,10 @@ class ShoesList extends Template
      */
     protected $categoryFactory;
 
+    /**
+     * @var FormKey
+     */
+    protected $formKey;
     /**
      * @var CollectionFactory
      */
@@ -34,12 +39,14 @@ class ShoesList extends Template
         CategoryFactory $categoryFactory,
         CollectionFactory $collectionFactory,
         \Magento\Catalog\Model\ProductRepository $productRepository,
+        FormKey $formkey,
         array $data = []
     ) {
         parent::__construct($context, $data);
         $this->categoryFactory = $categoryFactory;
         $this->collectionFactory = $collectionFactory;
         $this->productRepository = $productRepository;
+        $this->formkey = $formkey;
     }
 
     /**
@@ -73,12 +80,13 @@ class ShoesList extends Template
         return $imageUrl;
     }
 
-    public function getSimpleProductImageUrl($simpleProductId){
+    public function getSimpleProductImageUrl($simpleProductId)
+    {
         $mediaBaseUrl = $this->_storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
 
         $simpleProduct = $this->productRepository->getById($simpleProductId);
         $image = $simpleProduct->getImage();
-        $imageUrl = $mediaBaseUrl. 'catalog/product/'. $image;
+        $imageUrl = $mediaBaseUrl . 'catalog/product/' . $image;
         return $imageUrl;
     }
 
@@ -110,5 +118,11 @@ class ShoesList extends Template
     {
         $productId = $product->getId();
         return $productId;
+    }
+
+    public function getFormKeyForWishlist()
+    {
+        $formKey = $this->formkey->getFormKey();
+        return $formKey;
     }
 }

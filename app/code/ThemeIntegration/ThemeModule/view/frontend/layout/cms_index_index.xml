@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<body>
+		<referenceContainer name="content">
+			<block class="Magento\Framework\View\Element\Template" name="custom.slider" template="Magento_Theme::Slider.phtml" />
+			<block class="ThemeIntegration\ThemeModule\Block\CategoryList" name="custom.category" template="ThemeIntegration_ThemeModule::TopCategories.phtml" />
+			<block class="ThemeIntegration\TopBrands\Block\TopBrandsList" name="topbrands.block" template="ThemeIntegration_TopBrands::TopBrands.phtml" />
+			<block class="ThemeIntegration\ThemeModule\Block\ShoesList" name="shoes.block" template="ThemeIntegration_ThemeModule::MenShoes.phtml" />
+		</referenceContainer>
+	</body>
+</page>
