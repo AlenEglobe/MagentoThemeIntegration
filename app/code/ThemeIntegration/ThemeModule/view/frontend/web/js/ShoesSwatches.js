@@ -1,5 +1,6 @@
 require(["jquery"], function ($) {
     $(document).ready(function () {
+        var selectedProductId = null;
         $(".swatch-option").click(function () {
             var SwatchesID = $(this).data("option-id");
             var $productImage = $(
@@ -19,6 +20,7 @@ require(["jquery"], function ($) {
                     $productContainer
                         .find(".product-image-photo")
                         .attr("src", imageUrl);
+                    selectedProductId = SwatchesID;
                 },
                 error: function (xhr, status, error) {
                     console.error("AJAX Error:", error);
@@ -49,6 +51,26 @@ require(["jquery"], function ($) {
                     console.error("AJAX Error:", error);
                 },
             });
+        });
+
+        $(".actions-primary").click(function (e) {
+            e.preventDefault();
+            console.log("clicked");
+            let message = $(this)
+                .closest(".product-item-actions") // Corrected the class selector
+                .find('input[name="uenc"]');
+            console.log(message.val());
+            // var selectSimpleProductId = $(this)
+            //     .closest(".product-item")
+            //     .find(".product-image-select")
+            //     .data("product-id");
+            console.log(selectedProductId);
+            if (selectedProductId == null) {
+                $(this)
+                    .closest(".product-item-actions")
+                    .find('input[name="uenc"]')
+                    .show();
+            }
         });
     });
 });
