@@ -56,6 +56,8 @@ require(["jquery"], function ($) {
         $(".actions-primary").click(function (e) {
             e.preventDefault();
             console.log("clicked");
+            var form_key = $(this).find("input[name = form-key]").val();
+            console.log(form_key);
             let message = $(this)
                 .closest(".product-item-actions") // Corrected the class selector
                 .find('input[name="uenc"]');
@@ -64,12 +66,27 @@ require(["jquery"], function ($) {
             //     .closest(".product-item")
             //     .find(".product-image-select")
             //     .data("product-id");
+
             console.log(selectedProductId);
             if (selectedProductId == null) {
-                $(this)
-                    .closest(".product-item-actions")
-                    .find('input[name="uenc"]')
-                    .show();
+                $(this).find('input[name="uenc"]').show();
+            } else {
+                var addToProductUrl =
+                    "/checkout/cart/add/product/" +
+                    selectedProductId +
+                    "/form_key/" +
+                    form_key;
+                $.ajax({
+                    url: addToProductUrl,
+                    method: "POST",
+                    success: function (response) {
+                        console.log("product added to cart successfully");
+                        window.location.href = "/index.php/checkout/cart/";
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("AJAX Error:", error);
+                    },
+                });
             }
         });
     });
