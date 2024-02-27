@@ -1,6 +1,9 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
 	<body>
+		<move element="top.links" destination="header-wrapper" before="top.search" />
 		<referenceBlock name="header.panel" remove="true" />
+		<referenceBlock name="authorization-link" remove="true" />
+		<referenceBlock name="wishlist-link" remove="true" />
 		<referenceBlock name="copyright" template="Magento_Theme::Copyright.phtml" />
 		<referenceContainer name="footer">
 			<referenceBlock name="form.subscribe" remove="true" />
@@ -8,21 +11,27 @@
 			<block class="Magento\Framework\View\Element\Template" name="custom.block" template="Magento_Theme::AboutUs.phtml" before="footer_links" />
 			<referenceBlock name="footer_links" template="Magento_Theme::FooterLinks.phtml" />
 		</referenceContainer>
-		<!-- <referenceContainer name="content"> -->
-		<!--
-		<referenceBlock name="header.wrapper">
-		<block class="Magento\Framework\View\Element\Template" name="custom.slider" template="Magento_Theme::Slider.phtml" />
-		<block class="ThemeIntegration\ThemeModule\Block\CategoryList" name="custom.category" template="ThemeIntegration_ThemeModule::TopCategories.phtml" />
-		<block class="ThemeIntegration\TopBrands\Block\TopBrandsList" name="topbrands.block" template="ThemeIntegration_TopBrands::TopBrands.phtml" />
-		<block class="ThemeIntegration\ThemeModule\Block\ShoesList" name="shoes.block" template="ThemeIntegration_ThemeModule::MenShoes.phtml" />
+		<referenceBlock name="top.links">
+			<block class="Magento\Customer\Block\Account\Link" name="my-account-link">
+				<arguments>
+					<argument name="label" xsi:type="string" translate="true">
+					</argument>
+					<argument name="class" xsi:type="string" translate="true">
+						my-account-link
+					</argument>
+				</arguments>
+			</block>
+			<block class="Magento\Wishlist\Block\Link" name="wish-list-link">
+				<arguments>
+					<argument name="label" xsi:type="string" translate="false">
+						<!-- ThemeIntegration_Magento2_Theme::link.phtml -->
+						my wishlist
+					</argument>
+					<argument name="class" xsi:type="string" translate="true">
+						icon
+					</argument>
+				</arguments>
+			</block>
 		</referenceBlock>
-		</referenceContainer>
-		-->
-		<!--
-		<referenceContainer name="page.wrapper">
-		<block class="Magento\Framework\View\Element\Template" name="top.header" template="NewTheme::customheader.phtml" before="header.container" />
-		</referenceContainer>
-		-->
-		<move element="minicart" destination="top.header" />
 	</body>
 </page>
