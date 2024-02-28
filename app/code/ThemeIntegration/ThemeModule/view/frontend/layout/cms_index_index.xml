@@ -6,6 +6,7 @@
 			<block class="ThemeIntegration\ThemeModule\Block\CategoryList" name="custom.category" template="ThemeIntegration_ThemeModule::TopCategories.phtml" />
 			<block class="ThemeIntegration\TopBrands\Block\TopBrandsList" name="topbrands.block" template="ThemeIntegration_TopBrands::TopBrands.phtml" />
 			<block class="ThemeIntegration\ThemeModule\Block\ShoesList" name="shoes.block" template="ThemeIntegration_ThemeModule::MenShoes.phtml" />
+			<block class="ThemeIntegration\ThemeModule\Block\EarphonesList" name="earphones.block" template="ThemeIntegration_ThemeModule::Earphones.phtml" />
 		</referenceContainer>
 	</body>
 </page>

@@ -1,0 +1,97 @@
+<?php
+
+use ThemeIntegration\ThemeModule\Block\EarphonesList;
+
+$blockobj = $block->getLayout()->createBlock(EarphonesList::class);
+$earphoneData = $blockobj->getEarphonesList();
+
+?>
+<section class="products-section">
+    <div class="page-main">
+        <div class="content-heading">
+            <h2 class="title">EarPhones</h2>
+        </div>
+        <div class="block widget block-products-list grid">
+            <div class="block-content">
+                <div class="products-grid grid">
+                    <ol class="product-items widget-product-grid owl-carousel owl-theme product-carousel ">
+                        <?php foreach ($earphoneData as $earphone) :
+                            $productImage = $blockobj->getProductImageUrl($earphone);
+                            $productId = $blockobj->getProductId($earphone);
+                            $simpleProducts = $blockobj->getSimpleProduct($productId);
+                            $form_key = $blockobj->getFormKeyForWishlist(); ?>
+                            <li class="product-item">
+                                <div class="product-item-info">
+                                    <a href="#" class="product-item-photo">
+                                        <span class="product-image-container product-image-container-1562" style="width: 240px;">
+                                            <span class="product-image-wrapper" style="padding-bottom: 125%;">
+                                                <img class="product-image-photo" src="<?= $productImage; ?>" loading="lazy" width="240" height="300" alt="Product image"></span>
+                                        </span>
+                                        <style>
+                                            .product-image-container-1562 {
+                                                width: 240px;
+                                            }
+
+                                            .product-image-container-1562 span.product-image-wrapper {
+                                                padding-bottom: 125%;
+                                            }
+                                        </style>
+                                    </a>
+                                    <div class="product-item-details">
+                                        <strong class="product-item-name">
+                                            <a title="Radiant Tee" href="#" class="product-item-link">
+                                                Rockerz Headphones </a>
+                                        </strong>
+                                        <div class="price-box price-final_price" data-role="priceBox" data-product-id="1562" data-price-box="product-id-1562">
+                                            <span class="old-price">
+                                                <span>₹822.00</span>
+                                            </span>
+                                            <span class="normal-price">
+                                                <span class="price-container price-final_price tax weee">
+                                                    <span id="old-price-1562-widget-product-grid" data-price-amount="22" data-price-type="finalPrice" class="price-wrapper "><span class="price">₹522.00</span></span>
+                                                </span>
+                                            </span>
+                                        </div>
+                                        <div class="swatch-opt-1562" data-role="swatch-option-1562" data-rendered="true">
+                                            <div class="swatch-attribute size" data-attribute-code="size" data-attribute-id="144">
+                                            </div>
+                                            <div class="swatch-attribute color" data-attribute-code="color" data-attribute-id="93">
+                                                <div aria-activedescendant="" tabindex="0" aria-invalid="false" aria-required="true" role="listbox" aria-label="Color" class="swatch-attribute-options clearfix">
+                                                    <?php foreach ($simpleProducts as $simpleProduct) : ?>
+                                                        <div class="swatch-option color" id="option-label-color-93-item-50" index="0" aria-checked="false" aria-describedby="option-label-color-93" tabindex="0" data-option-type="1" data-option-id="<?= $simpleProduct['id']; ?>" data-option-label="Blue" aria-label="Blue" role="option" data-thumb-width="110" data-thumb-height="90" data-option-tooltip-value="#DD4A4A" style="background: <?= $simpleProduct['color']; ?> no-repeat center; background-size: initial;"></div>
+                                                        <!-- <div class="swatch-option color" id="option-label-color-93-item-56" index="1" aria-checked="false" aria-describedby="option-label-color-93" tabindex="0" data-option-type="1" data-option-id="56" data-option-label="Orange" aria-label="Orange" role="option" data-thumb-width="110" data-thumb-height="90" data-option-tooltip-value="#717171" style="background: #717171 no-repeat center; background-size: initial;"></div>
+                                                    <div class="swatch-option color" id="option-label-color-93-item-57" index="2" aria-checked="false" aria-describedby="option-label-color-93" tabindex="0" data-option-type="1" data-option-id="57" data-option-label="Purple" aria-label="Purple" role="option" data-thumb-width="110" data-thumb-height="90" data-option-tooltip-value="#4AA8DD" style="background: #4AA8DD no-repeat center; background-size: initial;"></div> -->
+                                                    <?php endforeach; ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="product-item-inner">
+                                            <div class="product-item-actions">
+                                                <div class="actions-primary">
+                                                    <form data-role="tocart-form" data-product-sku="WS12" action="#" method="post">
+                                                        <input type="hidden" name="product" value="1562">
+                                                        <input type="hidden" name="form-key" value="<?= $form_key; ?>">
+                                                        <input type="hidden" name="uenc" value="aHR0cHM6Ly9tYWdlbnRvLm51Ymx1ZS5jby51ay9jaGVja291dC9jYXJ0L2FkZC91ZW5jL2FIUjBjSE02THk5dFlXZGxiblJ2TG01MVlteDFaUzVqYnk1MWF5OCUyQy9wcm9kdWN0LzE1NjIv">
+                                                        <input name="form_key" type="hidden" value="njfb4cUiqt9DIdtW"> <button type="submit" title="Add to Cart" class="action tocart primary">
+                                                            <span>Add to Cart</span>
+                                                        </button>
+                                                        <input class="swatch-input super-attribute-select" name="super_attribute[144]" type="text" value="" data-selector="super_attribute[144]" data-validate="{required: true}" aria-required="true" aria-invalid="false"><input class="swatch-input super-attribute-select" name="super_attribute[93]" type="text" value="" data-selector="super_attribute[93]" data-validate="{required: true}" aria-required="true" aria-invalid="false">
+                                                    </form>
+                                                </div>
+                                                <div class="actions-secondary" data-role="add-to-links" data-product-id="<?= $productId; ?>" data-form-key="<?= $form_key; ?>">
+                                                    <a href="#" data-post="{&quot;action&quot;:&quot;https:\/\/magento.nublue.co.uk\/wishlist\/index\/add\/&quot;,&quot;data&quot;:{&quot;product&quot;:1562,&quot;uenc&quot;:&quot;aHR0cHM6Ly9tYWdlbnRvLm51Ymx1ZS5jby51ay8,&quot;}}" class="action towishlist" data-action="add-to-wishlist" title="Add to Wish List">
+                                                        <span>Add to Wish List</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        <?php endforeach; ?>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
