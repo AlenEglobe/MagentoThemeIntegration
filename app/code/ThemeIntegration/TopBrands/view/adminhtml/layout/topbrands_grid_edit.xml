@@ -4,6 +4,7 @@
 	<body>
 		<referenceContainer name="content">
 			<uiComponent name="ui_form" />
+			<!-- <uiComponent name="review_listing" /> -->
 		</referenceContainer>
 	</body>
 </page>

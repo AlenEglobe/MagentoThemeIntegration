@@ -1,92 +1,108 @@
-require(["jquery"], function ($) {
-    $(document).ready(function () {
-        var selectedProductId = null;
-        $(".swatch-option").click(function () {
-            var SwatchesID = $(this).data("option-id");
-            var $productImage = $(
-                ".config-product-image[data-product-id='" + SwatchesID + "']"
-            );
-            var $productContainer = $(this).closest(".product-item");
+document.addEventListener("DOMContentLoaded", function () {
+    var selectedProductId = null;
 
-            // console.log(ImageUrl);
-            console.log(SwatchesID);
-            $.ajax({
-                url: "swatches/ajax/media/",
-                method: "GET",
-                data: { product_id: SwatchesID, isAjax: true },
-                success: function (response) {
+    var swatchOptions = document.querySelectorAll(".swatch-option");
+    swatchOptions.forEach(function (option) {
+        option.addEventListener("click", function () {
+            var swatchesId = this.dataset.optionId;
+            var productImage = document.querySelector(
+                ".config-product-image[data-product-id='" + swatchesId + "']"
+            );
+            var productContainer = this.closest(".product-item");
+
+            console.log(swatchesId);
+            var xhr = new XMLHttpRequest();
+            xhr.open(
+                "GET",
+                "swatches/ajax/media/?product_id=" +
+                    swatchesId +
+                    "&isAjax=true",
+                true
+            );
+            xhr.onload = function () {
+                if (xhr.status >= 200 && xhr.status < 400) {
+                    var response = JSON.parse(xhr.responseText);
                     var imageUrl = response.large;
-                    // $productImage.attr("src", imageUrl);
-                    $productContainer
-                        .find(".product-image-photo")
-                        .attr("src", imageUrl);
-                    selectedProductId = SwatchesID;
-                },
-                error: function (xhr, status, error) {
-                    console.error("AJAX Error:", error);
-                },
-            });
+                    productContainer.querySelector(".product-image-photo").src =
+                        imageUrl;
+                    selectedProductId = swatchesId;
+                } else {
+                    console.error("AJAX Error:", xhr.statusText);
+                }
+            };
+            xhr.onerror = function () {
+                console.error("AJAX Error:", xhr.statusText);
+            };
+            xhr.send();
         });
-        $(".actions-secondary").click(function () {
-            var productId = $(this).data("product-id");
-            var form_key = $(this).data("form-key");
+    });
+
+    var secondaryActions = document.querySelectorAll(".actions-secondary");
+    secondaryActions.forEach(function (action) {
+        action.addEventListener("click", function () {
+            var productId = this.dataset.productId;
+            var formKey = this.dataset.formKey;
             console.log("clicked");
             console.log(productId);
-            console.log(form_key);
+            console.log(formKey);
             var wishlistUrl =
                 "/wishlist/index/add/product/" +
                 productId +
                 "/form_key/" +
-                form_key;
+                formKey;
 
-            $.ajax({
-                url: wishlistUrl,
-                method: "POST",
-
-                success: function (response) {
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", wishlistUrl, true);
+            xhr.onload = function () {
+                if (xhr.status >= 200 && xhr.status < 400) {
                     console.log("Product added to wishlist.");
                     window.location.href = "/index.php/wishlist/";
-                },
-                error: function (xhr, status, error) {
-                    console.error("AJAX Error:", error);
-                },
-            });
+                } else {
+                    console.error("AJAX Error:", xhr.statusText);
+                }
+            };
+            xhr.onerror = function () {
+                console.error("AJAX Error:", xhr.statusText);
+            };
+            xhr.send();
         });
+    });
 
-        $(".actions-primary").click(function (e) {
+    var primaryActions = document.querySelectorAll(".actions-primary");
+    primaryActions.forEach(function (action) {
+        action.addEventListener("click", function (e) {
             e.preventDefault();
             console.log("clicked");
-            var form_key = $(this).find("input[name = form-key]").val();
-            console.log(form_key);
-            let message = $(this)
-                .closest(".product-item-actions") // Corrected the class selector
-                .find('input[name="uenc"]');
-            console.log(message.val());
-            // var selectSimpleProductId = $(this)
-            //     .closest(".product-item")
-            //     .find(".product-image-select")
-            //     .data("product-id");
+            var formKey = this.querySelector("input[name=form-key]").value;
+            console.log(formKey);
+            var message = this.closest(".product-item-actions").querySelector(
+                'input[name="uenc"]'
+            );
+            console.log(message.value);
 
             console.log(selectedProductId);
             if (selectedProductId == null) {
-                $(this).find('input[name="uenc"]').show();
+                message.style.display = "block";
             } else {
                 var addToProductUrl =
                     "/checkout/cart/add/product/" +
                     selectedProductId +
                     "/form_key/" +
-                    form_key;
-                $.ajax({
-                    url: addToProductUrl,
-                    method: "POST",
-                    success: function (response) {
+                    formKey;
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", addToProductUrl, true);
+                xhr.onload = function () {
+                    if (xhr.status >= 200 && xhr.status < 400) {
                         console.log("product added to cart successfully");
                         window.location.href = "/index.php/checkout/cart/";
-                    },
-                    error: function (xhr, status, error) {
-                        console.error("AJAX Error:", error);
-                    },
-                });
+                    } else {
+                        console.error("AJAX Error:", xhr.statusText);
+                    }
+                };
+                xhr.onerror = function () {
+                    console.error("AJAX Error:", xhr.statusText);
+                };
+                xhr.send();
             }
         });
     });

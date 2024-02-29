@@ -131,9 +131,46 @@
 								topbrands/grid/image
 							</param>
 						</uploaderConfig>
+						<previewTmpl>
+							Magento_Catalog/image-preview
+						</previewTmpl>
 					</settings>
 				</imageUploader>
 			</formElements>
 		</field>
+	</fieldset>
+	<fieldset name="product_review">
+		<settings>
+			<collapsible>
+				true
+			</collapsible>
+			<label translate="true">
+				Product Review
+			</label>
+		</settings>
+		<insertListing name="review_listing">
+			<settings>
+				<dataLinks>
+					<exports>
+						false
+					</exports>
+					<imports>
+						true
+					</imports>
+				</dataLinks>
+				<autoRender>
+					true
+				</autoRender>
+				<selectionsProvider>
+					review_listing.review_listing.columns.ids
+				</selectionsProvider>
+				<dataScope>
+					review_listing
+				</dataScope>
+				<ns>
+					review_listing
+				</ns>
+			</settings>
+		</insertListing>
 	</fieldset>
 </form>
