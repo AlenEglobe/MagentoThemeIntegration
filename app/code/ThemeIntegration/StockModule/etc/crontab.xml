@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+	<group id="default">
+		<job name="check_product_stock" instance="ThemeIntegration\StockModule\Cron\CheckStock" method="execute">
+			<schedule>
+				*/5 * * * *
+			</schedule>
+			<!-- Run every 5 minutes -->
+		</job>
+	</group>
+</config>
