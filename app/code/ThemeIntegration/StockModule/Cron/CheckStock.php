@@ -2,18 +2,17 @@
 
 namespace ThemeIntegration\StockModule\Cron;
 
-use  Magento\CatalogInventory\Api\StockRegistryInterface;
 use Magento\Catalog\Api\ProductRepositoryInterface;
-// use Magento\CatalogInventory\Api\StockItemRepositoryInterface;
-// use Magento\CatalogInventory\Api\StockRepositoryInterface;
+
 use Magento\InventoryApi\Api\SourceItemRepositoryInterface;
 use Psr\Log\LoggerInterface;
-use Magento\Framework\Api\SearchCriteriaBuilder;
+
 use Magento\Framework\Api\SearchCriteriaBuilderFactory;
-use Magento\Framework\Api\SearchCriteriaInterface;
 
+use Magento\Framework\Mail\Template\TransportBuilder;
+use Magento\Store\Model\StoreManagerInterface;
 
-use Magento\Quote\Model\Cart\ProductReader;
+use Magento\Framework\App\Config\ScopeConfigInterface;
 
 class CheckStock
 {
@@ -31,29 +30,40 @@ class CheckStock
 
     protected $logger;
 
+    protected $transportBuilder;
+
+    protected $storeManager;
+
+    protected $scopeConfig;
+
     public function __construct(
         ProductRepositoryInterface $productRepository,
         SourceItemRepositoryInterface $sourceItemRepository,
         LoggerInterface $logger,
-        SearchCriteriaBuilderFactory $searchCriteriaBuilderFactory
-
-
+        SearchCriteriaBuilderFactory $searchCriteriaBuilderFactory,
+        TransportBuilder $transportBuilder,
+        StoreManagerInterface $storeManager,
+        ScopeConfigInterface $scopeConfig
     ) {
         $this->productRepository = $productRepository;
         $this->sourceItemRepository = $sourceItemRepository;
         $this->logger = $logger;
         $this->searchCriteriaBuilderFactory = $searchCriteriaBuilderFactory;
         $this->searchCriteriaBuilder = $this->searchCriteriaBuilderFactory->create();
+
+        $this->transportBuilder = $transportBuilder;
+        $this->storeManager = $storeManager;
+        $this->scopeConfig = $scopeConfig;
     }
     public function execute()
     {
         // Get product stock below 50
-        $products = $this->getProductsBelowThreshold(50);
+        $products = $this->getProductsBelowThreshold(30);
 
         // Perform action for each product
         foreach ($products as $product) {
             // Perform action, e.g., send alert
-            $this->sendAlert($product);
+            $this->sendAlert($product, $product->getName());
         }
     }
 
@@ -87,12 +97,35 @@ class CheckStock
 
         return $products;
     }
-
-    protected function sendAlert($product)
+    protected function sendAlert($product, $productName)
     {
-        // Example: Log product alert
-        $this->logger->info('Product stock is below 50: ' . $product->getName());
-        // Example: Send email alert
-        // Implement your email sending logic here
+        // Prepare email content
+        $subject = 'Product Stock Alert';
+        $message = 'The stock of product "' . $product->getName() . '" is below 50.';
+        $templateParams =
+            ['product_name' => $productName];
+
+
+        try {
+            // Send email
+
+
+            $store = $this->storeManager->getStore();
+            // $senderEmail = $this->scopeConfig->getValue('trans_email/ident_general/email', \Magento\Store\Model\ScopeInterface::SCOPE_STORE, $store->getId());
+            // $senderName = $this->scopeConfig->getValue('trans_email/ident_general/name', \Magento\Store\Model\ScopeInterface::SCOPE_STORE, $store->getId());
+            $customEmail = 'alen.george@eglobeits.com';
+            $transport = $this->transportBuilder
+                ->setTemplateIdentifier('lowStock_template')
+                ->setTemplateOptions(['area' => \Magento\Framework\App\Area::AREA_FRONTEND, 'store' => \Magento\Store\Model\Store::DEFAULT_STORE_ID])
+                ->setTemplateVars($templateParams)
+                ->setFromByScope(['email' => 'alen.george@eglobeits.com', 'name' => 'Sender'])
+                ->addTo($customEmail)
+                ->getTransport();
+
+            $transport->sendMessage();
+            $this->logger->info('Product stock alert email sent for: ' . $product->getName());
+        } catch (\Exception $e) {
+            $this->logger->error('Error sending product stock alert email: ' . $e->getMessage());
+        }
     }
 }

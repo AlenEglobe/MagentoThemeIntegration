@@ -1,0 +1,36 @@
+<!--@subject Low Stock Alert @-->
+<!--@vars
+{"store url=\"\"":"Store Url",
+"var product.name":"Product Name",
+"var product.sku":"Product SKU",
+"var product.qty":"Product Quantity"
+}
+@-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Low Stock Alert</title>
+    </head>
+    <body>
+        <h1>Low Stock Alert</h1>
+        <p>Dear Admin,</p>
+        <p>This is to inform you that the following product is low on stock:</p>
+        <ul>
+            <li>
+                <strong>Product Name:</strong> {{trans "%product_name"
+                product_name=$product.name}}
+            </li>
+            <li>
+                <strong>Product SKU:</strong> {{trans "%product_sku"
+                product_sku=$product.sku}}
+            </li>
+            <li>
+                <strong>Remaining Quantity:</strong> {{trans "%product_qty"
+                product_qty=$product.qty}}
+            </li>
+        </ul>
+        <p>Please take necessary actions to replenish the stock.</p>
+        <p>Thank you.</p>
+    </body>
+</html>
