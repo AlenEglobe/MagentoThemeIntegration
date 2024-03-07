@@ -2,7 +2,6 @@
 
 namespace ThemeIntegration\ThemeModule\Block;
 
-
 use Magento\Catalog\Model\CategoryFactory;
 use Magento\Catalog\Model\ResourceModel\Product\CollectionFactory;
 use Magento\Framework\View\Element\Template;
@@ -18,21 +17,28 @@ class EarphonesList extends Template
     protected $categoryFactory;
 
     /**
-     * @var FormKey
-     */
-    protected $formKey;
-    /**
      * @var CollectionFactory
      */
     protected $collectionFactory;
+
+    /**
+     * @var \Magento\Catalog\Model\ProductRepository
+     */
     protected $productRepository;
 
     /**
-     * ShoesList constructor.
+     * @var FormKey
+     */
+    protected $formKey;
+
+    /**
+     * EarphonesList constructor.
      *
      * @param Context $context
      * @param CategoryFactory $categoryFactory
      * @param CollectionFactory $collectionFactory
+     * @param \Magento\Catalog\Model\ProductRepository $productRepository
+     * @param FormKey $formKey
      * @param array $data
      */
     public function __construct(
@@ -40,18 +46,18 @@ class EarphonesList extends Template
         CategoryFactory $categoryFactory,
         CollectionFactory $collectionFactory,
         \Magento\Catalog\Model\ProductRepository $productRepository,
-        FormKey $formkey,
+        FormKey $formKey,
         array $data = []
     ) {
         parent::__construct($context, $data);
         $this->categoryFactory = $categoryFactory;
         $this->collectionFactory = $collectionFactory;
         $this->productRepository = $productRepository;
-        $this->formkey = $formkey;
+        $this->formKey = $formKey;
     }
 
     /**
-     * Get shoes list under the category ID 23
+     * Get earphones list under the category ID 20.
      *
      * @return ProductCollection
      */
@@ -66,27 +72,35 @@ class EarphonesList extends Template
         return $products;
     }
 
-    public function getProductImageUrl($product)
+    /**
+     * Get the image URL of a product.
+     *
+     * @param mixed $product
+     *
+     * @return string
+     */
+    public function getProductImageUrl($product): string
     {
-
         $mediaBaseUrl = $this->_storeManager->getStore()
             ->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
-
         $image = $product->getImage();
-
         $imageUrl = $mediaBaseUrl . 'catalog/product/' . $image;
         return $imageUrl;
     }
 
-    public function getSimpleProduct($configProductId)
+    /**
+     * Get details of simple products associated with a configurable product.
+     *
+     * @param int $configProductId
+     *
+     * @return array
+     */
+    public function getSimpleProduct(int $configProductId): array
     {
-
-        $configProduct = $this->productRepository->getById($configProductId); // get the configurable product using its id .
-
+        $configProduct = $this->productRepository->getById($configProductId);
         $simpleProductArray = $configProduct->getTypeInstance()->getUsedProducts($configProduct);
-
+        $simpleProduct = [];
         foreach ($simpleProductArray as $product) {
-
             $simpleProduct[] = [
                 'id' => $product->getId(),
                 'title' => $product->getName(),
@@ -95,31 +109,44 @@ class EarphonesList extends Template
                 'color' => $product->getAttributeText('color'),
             ];
         }
-
-
-
         return $simpleProduct;
     }
 
-    public function getProductId($product)
+    /**
+     * Get the ID of a product.
+     *
+     * @param mixed $product
+     *
+     * @return int
+     */
+    public function getProductId($product): int
     {
-        $productId = $product->getId();
-        return $productId;
+        return $product->getId();
     }
 
-    public function getSimpleProductImageUrl($simpleProductId)
+    /**
+     * Get the image URL of a simple product by its ID.
+     *
+     * @param int $simpleProductId
+     *
+     * @return string
+     */
+    public function getSimpleProductImageUrl(int $simpleProductId): string
     {
         $mediaBaseUrl = $this->_storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
-
         $simpleProduct = $this->productRepository->getById($simpleProductId);
         $image = $simpleProduct->getImage();
         $imageUrl = $mediaBaseUrl . 'catalog/product/' . $image;
         return $imageUrl;
     }
 
-    public function getFormKeyForWishlist()
+    /**
+     * Get the form key for wishlist.
+     *
+     * @return string
+     */
+    public function getFormKeyForWishlist(): string
     {
-        $formKey = $this->formkey->getFormKey();
-        return $formKey;
+        return $this->formKey->getFormKey();
     }
 }
