@@ -20,18 +20,24 @@ class ShoesList extends Template
      * @var FormKey
      */
     protected $formKey;
+
     /**
      * @var CollectionFactory
      */
     protected $collectionFactory;
+
+    /**
+     * @var \Magento\Catalog\Model\ProductRepository
+     */
     protected $productRepository;
 
     /**
      * ShoesList constructor.
-     *
      * @param Context $context
      * @param CategoryFactory $categoryFactory
      * @param CollectionFactory $collectionFactory
+     * @param \Magento\Catalog\Model\ProductRepository $productRepository
+     * @param FormKey $formKey
      * @param array $data
      */
     public function __construct(
@@ -39,14 +45,14 @@ class ShoesList extends Template
         CategoryFactory $categoryFactory,
         CollectionFactory $collectionFactory,
         \Magento\Catalog\Model\ProductRepository $productRepository,
-        FormKey $formkey,
+        FormKey $formKey,
         array $data = []
     ) {
         parent::__construct($context, $data);
         $this->categoryFactory = $categoryFactory;
         $this->collectionFactory = $collectionFactory;
         $this->productRepository = $productRepository;
-        $this->formkey = $formkey;
+        $this->formKey = $formKey;
     }
 
     /**
@@ -56,49 +62,67 @@ class ShoesList extends Template
      */
     public function getShoesList(): ProductCollection
     {
-        $categoryId = 23; // Category ID for shoes
+        $categoryId = 23;
         $category = $this->categoryFactory->create()->load($categoryId);
 
         $products = $this->collectionFactory->create();
-
         $products->addAttributeToSelect('*');
         $products->addCategoryFilter($category);
 
-        // $shoesCollection = $category->getProductCollection()->addAttributeToSelect('*');
         return $products;
     }
 
-    public function getProductImageUrl($product)
+    /**
+     * Get product image URL
+     *
+     * @param \Magento\Catalog\Model\Product $product
+     *
+     * @return string
+     */
+    public function getProductImageUrl($product): string
     {
-
         $mediaBaseUrl = $this->_storeManager->getStore()
             ->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
 
         $image = $product->getImage();
-
         $imageUrl = $mediaBaseUrl . 'catalog/product/' . $image;
+
         return $imageUrl;
     }
 
-    public function getSimpleProductImageUrl($simpleProductId)
+    /**
+     * Get simple product image URL
+     *
+     * @param int $simpleProductId The ID of the simple product.
+     *
+     * @return string
+     */
+    public function getSimpleProductImageUrl($simpleProductId): string
     {
-        $mediaBaseUrl = $this->_storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+        $mediaBaseUrl = $this->_storeManager->getStore()
+            ->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
 
         $simpleProduct = $this->productRepository->getById($simpleProductId);
         $image = $simpleProduct->getImage();
         $imageUrl = $mediaBaseUrl . 'catalog/product/' . $image;
+
         return $imageUrl;
     }
 
-    public function getSimpleProduct($configProductId)
+    /**
+     * Get simple product data
+     *
+     * @param int $configProductId
+     *
+     * @return array
+     */
+    public function getSimpleProduct($configProductId): array
     {
-
-        $configProduct = $this->productRepository->getById($configProductId); // get the configurable product using its id .
-
+        $configProduct = $this->productRepository->getById($configProductId);
         $simpleProductArray = $configProduct->getTypeInstance()->getUsedProducts($configProduct);
 
+        $simpleProduct = [];
         foreach ($simpleProductArray as $product) {
-
             $simpleProduct[] = [
                 'id' => $product->getId(),
                 'title' => $product->getName(),
@@ -108,21 +132,30 @@ class ShoesList extends Template
             ];
         }
 
-
-
         return $simpleProduct;
     }
 
-
-    public function getProductId($product)
+    /**
+     * Get product ID
+     *
+     * @param \Magento\Catalog\Model\Product $product
+     *
+     * @return int
+     */
+    public function getProductId($product): int
     {
         $productId = $product->getId();
         return $productId;
     }
 
-    public function getFormKeyForWishlist()
+    /**
+     * Get form key for wishlist
+     *
+     * @return string
+     */
+    public function getFormKeyForWishlist(): string
     {
-        $formKey = $this->formkey->getFormKey();
+        $formKey = $this->formKey->getFormKey();
         return $formKey;
     }
 }
