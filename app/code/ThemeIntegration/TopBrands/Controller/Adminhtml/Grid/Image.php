@@ -2,25 +2,26 @@
 
 namespace ThemeIntegration\TopBrands\Controller\Adminhtml\Grid;
 
+use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Backend\Model\UrlInterface;
-use Magento\Framework\Controller\ResultFactory;
+use Magento\Framework\Controller\Result\Json;
+use Magento\Framework\Controller\Result\JsonFactory;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Filesystem;
 use Magento\MediaStorage\Model\File\UploaderFactory;
 use Magento\Store\Model\StoreManagerInterface;
 
-class Image extends \Magento\Backend\App\Action
+class Image extends Action
 {
 
     /**
-     *
      * @var UploaderFactory
      */
     protected $uploaderFactory;
 
-    /** 
-     * @var Filesystem\Directory\WriteInterface 
+    /**
+     * @var Filesystem\Directory\WriteInterface
      */
     protected $mediaDirectory;
 
@@ -29,21 +30,43 @@ class Image extends \Magento\Backend\App\Action
      */
     protected $storeManager;
 
+    /**
+     * @var JsonFactory
+     */
+    protected $resultJsonFactory;
+    
+    /**
+     * Image constructor.
+     *
+     * @param Context $context
+     * @param UploaderFactory $uploaderFactory
+     * @param Filesystem $filesystem
+     * @param StoreManagerInterface $storeManager
+     * @param JsonFactory $resultJsonFactory
+     */
     public function __construct(
         Context $context,
         UploaderFactory $uploaderFactory,
         Filesystem $filesystem,
-        StoreManagerInterface $storeManager
+        StoreManagerInterface $storeManager,
+        JsonFactory $resultJsonFactory
     ) {
         parent::__construct($context);
         $this->uploaderFactory = $uploaderFactory;
         $this->mediaDirectory = $filesystem->getDirectoryWrite(\Magento\Framework\App\Filesystem\DirectoryList::MEDIA);
         $this->storeManager = $storeManager;
+        $this->resultJsonFactory = $resultJsonFactory;
     }
 
-    public function execute()
+    /**
+     * Execute file upload action
+     *
+     * @return Json
+     */
+    public function execute(): Json
     {
-        $jsonResult = $this->resultFactory->create(ResultFactory::TYPE_JSON);
+        /** @var Json $jsonResult */
+        $jsonResult = $this->resultJsonFactory->create();
         try {
             $fileUploader = $this->uploaderFactory->create(['fileId' => 'Image']);
             $fileUploader->setAllowedExtensions(['jpg', 'jpeg', 'png']);
@@ -63,7 +86,7 @@ class Image extends \Magento\Backend\App\Action
         } catch (\Exception $e) {
             error_log($e->getMessage());
             error_log($e->getTraceAsString());
-            return $jsonResult->setData(['errorcode' => 0, 'error' => __('An error occurred, please try again later.')]);
+            return $jsonResult->setData(['errorcode' => 0,'error' => __('An error occurred, please try again later.')]);
         }
     }
 }

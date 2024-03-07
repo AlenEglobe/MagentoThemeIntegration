@@ -7,12 +7,19 @@ use Magento\Backend\App\Action\Context;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\View\Result\PageFactory;
 
-
 class Edit extends Action
 {
-
+    /**
+     * @var PageFactory
+     */
     protected $resultPageFactory;
 
+    /**
+     * edit constructor
+     *
+     * @param Context $context
+     * @param PageFactory $resultPageFactory
+     */
     public function __construct(
         Context $context,
         PageFactory $resultPageFactory
@@ -20,6 +27,12 @@ class Edit extends Action
         parent::__construct($context);
         $this->resultPageFactory = $resultPageFactory;
     }
+
+    /**
+     * Execute action
+     *
+     * @return \Magento\Framework\Controller\Result\Redirect
+     */
     public function execute()
     {
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
