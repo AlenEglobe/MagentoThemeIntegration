@@ -2,34 +2,42 @@
 
 namespace ThemeIntegration\TopBrands\Model;
 
-
 use ThemeIntegration\TopBrands\Api\Data\GridInterface;
-
 use ThemeIntegration\TopBrands\Model\ResourceModel\Grid\CollectionFactory;
 
 class Grid extends \Magento\Framework\Model\AbstractModel implements GridInterface
 {
     /**
-     * CMS page cache tag.
+     * Cache tag for the top brands
      */
-    const CACHE_TAG = 'top_brands';
+    public const CACHE_TAG = 'top_brands';
 
     /**
+     * Cache tag for the top brands
      * @var string
      */
     protected $_cacheTag = 'top_brands';
 
     /**
-     * Prefix of model events names.
-     *
+     * Event prefix for top brands
      * @var string
      */
     protected $_eventPrefix = 'top_brands';
 
     /**
-     * Initialize resource model.
+     * @var CollectionFactory
      */
+    protected $collectionFactory;
 
+    /**
+     * Grid constructor.
+     * @param \Magento\Framework\Model\Context $context
+     * @param \Magento\Framework\Registry $registry
+     * @param CollectionFactory $collectionFactory
+     * @param \Magento\Framework\Model\ResourceModel\AbstractResource|null $resource
+     * @param \Magento\Framework\Data\Collection\AbstractDb|null $resourceCollection
+     * @param array $data
+     */
     public function __construct(
         \Magento\Framework\Model\Context $context,
         \Magento\Framework\Registry $registry,
@@ -42,14 +50,20 @@ class Grid extends \Magento\Framework\Model\AbstractModel implements GridInterfa
         parent::__construct($context, $registry, $resource, $resourceCollection, $data);
     }
 
+    /**
+     * Initialize resource model
+     *
+     * @return void
+     */
     protected function _construct()
     {
-        $this->_init('ThemeIntegration\TopBrands\Model\ResourceModel\Grid');
+        $this->_init(\ThemeIntegration\TopBrands\Model\ResourceModel\Grid::class);
     }
+
     /**
-     * Get EntityId.
+     * Retrieve sorted collection
      *
-     * @return int
+     * @return \ThemeIntegration\TopBrands\Model\ResourceModel\Grid\Collection
      */
     public function getSortedCollection()
     {
@@ -58,13 +72,21 @@ class Grid extends \Magento\Framework\Model\AbstractModel implements GridInterfa
         return $collection;
     }
 
+    /**
+     * Get EntityId
+     *
+     * @return int|null
+     */
     public function getArticleId()
     {
         return $this->getData(self::ARTICLE_ID);
     }
 
     /**
-     * Set EntityId.
+     * Set EntityId
+     *
+     * @param int $articleId
+     * @return $this
      */
     public function setArticleId($articleId)
     {
@@ -72,9 +94,9 @@ class Grid extends \Magento\Framework\Model\AbstractModel implements GridInterfa
     }
 
     /**
-     * Get Title.
+     * Get Title
      *
-     * @return varchar
+     * @return string|null
      */
     public function getTitle()
     {
@@ -82,26 +104,32 @@ class Grid extends \Magento\Framework\Model\AbstractModel implements GridInterfa
     }
 
     /**
-     * Set Title.
+     * Set Title
+     *
+     * @param string $title
+     * @return $this
      */
     public function setTitle($title)
     {
         return $this->setData(self::BRAND, $title);
     }
 
-    // Get Image
-
-
-
+    /**
+     * Get Image
+     *
+     * @return string|null
+     */
     public function getImage()
     {
         return $this->getData(self::IMAGE);
     }
 
-
-    // Set Image
-
-
+    /**
+     * Set Image
+     *
+     * @param string $image
+     * @return $this
+     */
     public function setImage($image)
     {
         return $this->setData(self::IMAGE, $image);

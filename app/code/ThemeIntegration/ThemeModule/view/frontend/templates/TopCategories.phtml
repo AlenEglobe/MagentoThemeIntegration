@@ -55,11 +55,15 @@ $category = $blockobj->getCategoryCollection();
             <h2 class="title">Top Categories</h2>
         </div>
         <ul class="owl-carousel owl-theme top-category-slider-custom">
-            <?php foreach ($category as $singleCategory) : ?>
+            <?php foreach ($category as $singleCategory): ?>
                 <li class="top-category-list">
                     <a href="#">
-                        <figure class="top-category-image" style="background-image: url('<?= $singleCategory['image'] ?>');"> </figure>
-                        <h4><?= $singleCategory['name']; ?></h4>
+                        <figure 
+                            class="top-category-image" 
+                            style="background-image: url('<?=/* @noEscape */$singleCategory['image']; ?>');"
+                        > 
+                    </figure>
+                        <h4><?=/* @noEscape */$singleCategory['name']; ?></h4>
                     </a>
                 </li>
             <?php endforeach; ?>

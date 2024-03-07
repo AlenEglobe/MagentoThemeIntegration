@@ -7,7 +7,21 @@ use Magento\Ui\DataProvider\AbstractDataProvider;
 
 class DataProvider extends AbstractDataProvider
 {
+    /**
+     * @var $loadedData
+     */
     protected $loadedData;
+
+    /**
+     * Data provider constructor
+     *
+     * @param string $name
+     * @param string $primaryFieldName
+     * @param string  $requestFieldName
+     * @param CollectionFactory $collectionFactory
+     * @param array $meta
+     * @param array $data
+     */
 
     public function __construct(
         $name,
@@ -21,12 +35,17 @@ class DataProvider extends AbstractDataProvider
         parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
     }
 
+    /**
+     * Get data
+     *
+     * @return array
+     */
     public function getData()
     {
         if (isset($this->loadedData)) {
             return $this->loadedData;
         }
-        $items = $this->collection->getItems(); // your saved table data's collection model 
+        $items = $this->collection->getItems(); // your saved table data's collection model
         foreach ($items as $brand) {
             $brandData = $brand->getData();
 

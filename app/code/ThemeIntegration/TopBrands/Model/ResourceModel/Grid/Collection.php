@@ -13,6 +13,6 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
      */
     protected function _construct()
     {
-        $this->_init('ThemeIntegration\TopBrands\Model\Grid', 'ThemeIntegration\TopBrands\Model\ResourceModel\Grid');
+        $this->_init(\ThemeIntegration\TopBrands\Model\Grid::class, \ThemeIntegration\TopBrands\Model\ResourceModel\Grid::class);
     }
 }

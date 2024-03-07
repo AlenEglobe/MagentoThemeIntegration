@@ -6,9 +6,6 @@ namespace ThemeIntegration\TopBrands\Model\Grid;
 
 use Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider;
 
-/**
- * Class CustomDataProvider
- */
 class CustomDataProvider extends DataProvider
 {
     /**

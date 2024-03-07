@@ -28,7 +28,6 @@ class TopBrandsList extends Template
         Template\Context $context,
         GridFactory $gridFactory,
         StoreManagerInterface $storeManager,
-
         array $data = []
     ) {
         parent::__construct($context, $data);

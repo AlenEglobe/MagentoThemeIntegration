@@ -48,12 +48,12 @@ $topbrands = $blockobj->getTopBrands();
          <h2 class="title">Top brands</h2>
       </div>
       <ul class="owl-carousel owl-theme  top-brands-slider">
-         <?php foreach ($topbrands as $topbrand) : ?>
+         <?php foreach ($topbrands as $topbrand): ?>
 
             <li class="top-brands-list">
                <a href="#">
-                  <figure class="top-brands-image" style="background-image: url('<?php echo $topbrand['image']; ?>');"> </figure>
-                  <h4><?php echo $topbrand['title']; ?></h4>
+                  <figure class="top-brands-image" style="background-image: url('<?= $topbrand['image']; ?>');"> </figure>
+                  <h4><?= $topbrand['title']; ?></h4>
                </a>
             </li>
          <?php endforeach; ?>
